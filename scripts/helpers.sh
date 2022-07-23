@@ -53,10 +53,10 @@ get_velocity()
     local interval=$(get_tmux_option 'status-interval' 5)
     local vel=$(( ( new_value - old_value ) / interval ))
     local vel_kb=$(( vel / THOUSAND ))
-    local vel_mb=$(( vel / MILLION ))
+    local vel_mb=$(echo "$vel / $MILLION" | bc -l )
 
-    if [[ $vel_mb != 0 ]] ; then
-        echo -n "$vel_mb MB/s"
+    if [[ $vel_kb -gt 1024 ]] ; then
+        printf "%.2f MB/s" "$vel_mb"
     elif [[ $vel_kb != 0 ]] ; then
         echo -n "$vel_kb KB/s";
     else
