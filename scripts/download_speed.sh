@@ -28,7 +28,7 @@ main()
 
     ## Format output
     local format=$(get_tmux_option @download_speed_format "%s")
-    printf "$format" "$vel"
+    printf "$format" "$vel"
 }
 main
 
